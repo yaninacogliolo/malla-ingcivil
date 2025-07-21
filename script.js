@@ -1,98 +1,145 @@
-// Datos completos de la malla (estructurados según tu PDF)
-const mallaData = {
-    colores: {
-        azul: "Ciencias Básicas",
-        rosa: "Ciencias de la Ingeniería",
-        gris: "Pastoral",
-        violeta: "Humanísticas Comunes",
-        magenta: "Aplicaciones de la Ingeniería",
-        verde: "Complementarias",
-        amarillo: "Optativas"
-    },
-    semestres: [
-        // --- PRIMER AÑO ---
-        {
-            nombre: "Admisión (16 créditos)",
-            materias: [
-                { nombre: "Fe y Ciencias", creditos: 3, color: "gris", correlativas: [] },
-                { nombre: "Historia del Paraguay", creditos: 2, color: "violeta", correlativas: [] },
-                { nombre: "Lógica Simbólica", creditos: 3, color: "violeta", correlativas: [] },
-                { nombre: "Comunicación Oral y Escrita 1", creditos: 3, color: "violeta", correlativas: ["Comunicación Oral y Escrita 2"] },
-                { nombre: "Metodología del Aprendizaje", creditos: 2, color: "violeta", correlativas: [] },
-                { nombre: "Matemática 1", creditos: 3, color: "azul", correlativas: ["Cálculo 1"] }
-            ]
-        },
-        {
-            nombre: "Primer Semestre (16 créditos)",
-            materias: [
-                { nombre: "Introducción al Dibujo Técnico", creditos: 3, color: "rosa", correlativas: ["Dibujo Técnico"] },
-                { nombre: "Trigonometría", creditos: 3, color: "azul", correlativas: [] },
-                { nombre: "Álgebra", creditos: 4, color: "azul", correlativas: ["Álgebra Vectorial"] },
-                { nombre: "Geometría Analítica", creditos: 3, color: "azul", correlativas: [] },
-                { nombre: "Introducción a la Ingeniería", creditos: 3, color: "rosa", correlativas: [] }
-            ]
-        },
-        // --- SEGUNDO AÑO ---
-        {
-            nombre: "Tercer Semestre (27 créditos)",
-            materias: [
-                { nombre: "Representación Gráfica 1", creditos: 4, color: "rosa", correlativas: ["Topografía"] },
-                { nombre: "Cálculo 2", creditos: 5, color: "azul", correlativas: ["Cálculo 3", "Ecuaciones Diferenciales"] },
-                { nombre: "Álgebra Lineal", creditos: 4, color: "azul", correlativas: ["Mecánica Racional 1"] },
-                // ... Agregar todas las materias restantes según el PDF
-            ]
-        },
-        // ... Agregar TODOS los semestres restantes (hasta 5to año)
-    ]
-};
+[0:26, 21/7/2025] Sebas Laguardia: document.addEventListener('DOMContentLoaded', () => {
 
-// Generar la malla automáticamente
-document.addEventListener('DOMContentLoaded', () => {
-    const mallaContainer = document.getElementById('malla-container');
-    const modal = document.getElementById('modal');
-    const closeBtn = document.querySelector('.close');
+    // --- Definición de Datos de la Malla Curricular ---
+    const malla = [
+        // Admisión y Primer Semestre
+        { id: 'fe_ciencias', nombre: 'Fe y Ciencias', semestre: 0, prerequisitos: [], categoria: 'pastoral' },
+        { id: 'historia_py', nombre: 'Historia del Paraguay', semestre: 0, prerequisitos: [], categoria: 'humanisticas' },
+        { id: 'logica', nombre: 'Lógica Simbólica', semestre: 0, prerequisitos: [], categoria: 'basicas' },
+        { id: 'comunicacion1', nombre: 'Comunicación Oral y Escrita 1', semestre: 0, prerequisitos: [], categoria: 'humanisticas' },
+        { id: 'metodologia', nombre: 'Metodología del Aprendizaje', semestre: 0, prerequisitos: [], categoria: 'humanistic…
+[0:26, 21/7/2025] Sebas Laguardia: style
+[0:26, 21/7/2025] Sebas Laguardia: :root {
+    --main-pink: #ffb6c1;
+    --approved-green: #98fb98;
+    --locked-gray: #e0e0e0;
+    --text-color: #333;
+    --border-color: #e0e0e0;
+    --hover-pink: #ff9aa2;
+    --background-color: #fef5f7;
+    --header-color: #d8bfd8;
+}
 
-    // Crear semestres
-    mallaData.semestres.forEach(semestre => {
-        const semestreDiv = document.createElement('div');
-        semestreDiv.className = 'semestre';
-        semestreDiv.innerHTML = `<h2>${semestre.nombre}</h2><div class="materias-container"></div>`;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
 
-        const materiasContainer = semestreDiv.querySelector('.materias-container');
+.main-container {
+    width: 100%;
+    max-width: 1800px;
+}
 
-        // Añadir materias
-        semestre.materias.forEach(materia => {
-            const materiaDiv = document.createElement('div');
-            materiaDiv.className = `materia ${materia.color}`;
-            materiaDiv.textContent = materia.nombre;
-            
-            materiaDiv.addEventListener('click', () => {
-                document.getElementById('modal-title').textContent = materia.nombre;
-                document.getElementById('creditos-info').textContent = materia.creditos;
-                document.getElementById('categoria-info').textContent = mallaData.colores[materia.color];
-                
-                const correlativasList = document.getElementById('correlativas-list');
-                correlativasList.innerHTML = materia.correlativas.length > 0 
-                    ? materia.correlativas.map(c => `<li>${c}</li>`).join('')
-                    : '<li>No tiene correlativas</li>';
-                
-                modal.style.display = 'block';
-            });
+h1 {
+    text-align: center;
+    color: #8b5f8b;
+    margin-bottom: 25px;
+}
 
-            materiasContainer.appendChild(materiaDiv);
-        });
+.malla-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
 
-        mallaContainer.appendChild(semestreDiv);
-    });
+.semestre-columna {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-    // Cerrar modal
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+.semestre-titulo {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--header-color);
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
 
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-});
+.materia {
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--main-pink);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- Estados de la Materia --- */
+
+.materia.disponible {
+    cursor: pointer;
+}
+
+.materia.disponible:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: var(--hover-pink);
+    color: white;
+}
+
+.materia.bloqueada {
+    background-color: var(--locked-gray);
+    color: #888;
+    cursor: not-allowed;
+    border-left-color: #b0b0b0;
+}
+
+.materia.aprobada {
+    background-color: var(--approved-green);
+    border-left-color: #5f9e5f;
+    color: #333;
+    font-weight: bold;
+}
+
+.materia.aprobada::after {
+    content: ' ✔';
+    color: green;
+}
+
+/* --- Colores por Categoría --- */
+.materia[data-categoria="basicas"] { border-left-color: #6a9fca; }
+.materia[data-categoria="ingenieria"] { border-left-color: #ffb6c1; }
+.materia[data-categoria="aplicaciones"] { border-left-color: #d8bfd8; }
+.materia[data-categoria="pastoral"] { border-left-color: #c0c0c0; }
+.materia[data-categoria="humanisticas"] { border-left-color: #dda0dd; }
+.materia[data-categoria="complementarias"] { border-left-color: #98fb98; }
+
+
+/* Leyenda */
+.legend {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.legend h3 {
+    margin: 0;
+    margin-right: 15px;
+    color: #8b5f8b;
+}
+.legend-item {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+}
+.legend span {
+    margin-right: 10px;
+}
