@@ -1,35 +1,46 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    line-height: 1.6;
 }
+
 .semestre {
-    border: 2px solid #ddd;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
 }
+
 .materia {
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.2s;
+    color: white;
+    font-weight: bold;
 }
+
 .materia:hover {
-    transform: scale(1.02);
+    opacity: 0.9;
 }
-#info-correlativas {
-    background-color: #f8f9fa;
+
+#correlativas-info {
+    background: #e8f4f8;
     padding: 15px;
     border-radius: 8px;
     margin-top: 20px;
 }
+
 .hidden {
     display: none;
 }
-/* Colores según categoría */
-.azul { background-color: #3498db; }
-.rosa { background-color: #e91e63; }
-.gris { background-color: #95a5a6; }
-/* ... otros colores */
 
+/* Colores según tu PDF */
+.azul { background: #3498db; } /* Ciencias Básicas */
+.rosa { background: #e91e63; } /* Ciencias Ingeniería */
+.gris { background: #95a5a6; } /* Pastoral */
+.violeta { background: #9b59b6; } /* Humanísticas */
+.magenta { background: #e74c3c; } /* Aplicaciones */
+.verde { background: #2ecc71; } /* Complementarias */
+.amarillo { background: #f1c40f; color: black; } /* Optativas */
