@@ -1,57 +1,38 @@
-const contenedor = document.getElementById("contenedorMalla");
-const filtroTipo = document.getElementById("filtroTipo");
-
-let materias = [];
-
-fetch("malla.json")
-  .then(res => res.json())
-  .then(data => {
-    materias = data.semestres;
-    renderMalla();
-  });
-
-filtroTipo.addEventListener("change", renderMalla);
-
-function renderMalla() {
-  const tipoSeleccionado = filtroTipo.value;
-  contenedor.innerHTML = "";
-
-  materias.forEach(semestre => {
-    const bloque = document.createElement("div");
-    bloque.className = "semestre";
-
-    const titulo = document.createElement("h2");
-    titulo.textContent = `${semestre.numero}° Semestre`;
-    bloque.appendChild(titulo);
-
-    semestre.materias.forEach(materia => {
-      if (tipoSeleccionado === "todos" || materia.color === tipoSeleccionado) {
-        const card = document.createElement("div");
-        card.className = `materia ${materia.color}`;
-        card.innerHTML = `
-          ${materia.nombre}
-          <div class="correlativas">
-            ${materia.correlativas?.length ? `Requiere: ${materia.correlativas.join(", ")}` : ""}
-          </div>
-        `;
-        bloque.appendChild(card);
-      }
+document.addEventListener('DOMContentLoaded', () => {
+    const mallaContainer = document.getElementById('malla-container');
+    
+    // Generar la malla
+    mallaData.semestres.forEach(semestre => {
+        const semestreDiv = document.createElement('div');
+        semestreDiv.className = 'semestre';
+        semestreDiv.innerHTML = `<h2>${semestre.nombre} (${semestre.creditos} créditos)</h2>`;
+        
+        semestre.materias.forEach(materia => {
+            const materiaDiv = document.createElement('div');
+            materiaDiv.className = `materia ${materia.color}`;
+            materiaDiv.textContent = materia.nombre;
+            materiaDiv.onclick = () => mostrarCorrelativas(materia.correlativas);
+            semestreDiv.appendChild(materiaDiv);
+        });
+        
+        mallaContainer.appendChild(semestreDiv);
     });
+});
 
-    contenedor.appendChild(bloque);
-  });
+function mostrarCorrelativas(correlativas) {
+    const lista = document.getElementById('lista-correlativas');
+    const infoDiv = document.getElementById('info-correlativas');
+    
+    lista.innerHTML = '';
+    if (correlativas.length === 0) {
+        lista.innerHTML = '<li>No tiene correlativas.</li>';
+    } else {
+        correlativas.forEach(corr => {
+            const item = document.createElement('li');
+            item.textContent = corr;
+            lista.appendChild(item);
+        });
+    }
+    
+    infoDiv.classList.remove('hidden');
 }
-
-// Buscador por nombre
-const inputBuscar = document.createElement("input");
-inputBuscar.placeholder = "Buscar materia...";
-inputBuscar.style.margin = "1rem";
-inputBuscar.oninput = () => {
-  const texto = inputBuscar.value.toLowerCase();
-  document.querySelectorAll(".materia").forEach(m => {
-    m.style.display = m.textContent.toLowerCase().includes(texto) ? "block" : "none";
-  });
-};
-
-filtroTipo.parentElement.appendChild(inputBuscar);
-
