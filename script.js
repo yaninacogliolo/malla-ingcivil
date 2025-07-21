@@ -1,4 +1,4 @@
-[0:26, 21/7/2025] Sebas Laguardia: document.addEventListener('DOMContentLoaded', () => {
+[0:26, 21/7/2025] document.addEventListener('DOMContentLoaded', () => {
 
     // --- Definición de Datos de la Malla Curricular ---
     const malla = [
@@ -8,8 +8,8 @@
         { id: 'logica', nombre: 'Lógica Simbólica', semestre: 0, prerequisitos: [], categoria: 'basicas' },
         { id: 'comunicacion1', nombre: 'Comunicación Oral y Escrita 1', semestre: 0, prerequisitos: [], categoria: 'humanisticas' },
         { id: 'metodologia', nombre: 'Metodología del Aprendizaje', semestre: 0, prerequisitos: [], categoria: 'humanistic…
-[0:26, 21/7/2025] Sebas Laguardia: style
-[0:26, 21/7/2025] Sebas Laguardia: :root {
+[0:26, 21/7/2025]  style
+[0:26, 21/7/2025]  :root {
     --main-pink: #ffb6c1;
     --approved-green: #98fb98;
     --locked-gray: #e0e0e0;
