@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Malla Ing. - Interactiva</title>
+    <meta charset="UTF-8">
+    <title>Malla Completa - Ingeniería</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Malla Curricular - Ingeniería</h1>
-    <div id="malla"></div>
-    <div id="correlativas-info" class="hidden">
-        <h3>Correlativas habilitadas:</h3>
-        <ul id="correlativas-list"></ul>
+    <div class="header">
+        <h1>🔧 Malla Curricular de Ingeniería</h1>
+        <p>Universidad XYZ - Plan 2023</p>
     </div>
+
+    <div id="malla-container"></div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div class="modal-body">
+                <p><strong>Correlativas:</strong></p>
+                <ul id="correlativas-list"></ul>
+                <p><strong>Créditos:</strong> <span id="creditos-info"></span></p>
+                <p><strong>Categoría:</strong> <span id="categoria-info"></span></p>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
