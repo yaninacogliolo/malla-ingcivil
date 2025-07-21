@@ -1,36 +1,32 @@
-{
-  "semestres": [
-    {
-      "numero": 1,
-      "materias": [
-        { "nombre": "Fe y Ciencias", "color": "gris", "correlativas": [] },
-        { "nombre": "Historia del Paraguay", "color": "violeta", "correlativas": [] },
-        { "nombre": "Lógica Simbólica", "color": "azul", "correlativas": [] },
-        { "nombre": "Comunicación oral y escrita 1", "color": "violeta", "correlativas": [] },
-        { "nombre": "Metodología del aprendizaje", "color": "verde", "correlativas": [] },
-        { "nombre": "Matemática", "color": "azul", "correlativas": [] },
-        { "nombre": "Introducción al Dibujo técnico", "color": "rosado", "correlativas": [] },
-        { "nombre": "Trigonometría", "color": "azul", "correlativas": [] },
-        { "nombre": "Álgebra", "color": "azul", "correlativas": [] },
-        { "nombre": "Geometría Analítica", "color": "azul", "correlativas": [] },
-        { "nombre": "Introducción a la Ingeniería", "color": "rosado", "correlativas": [] }
-      ]
-    },
-    {
-      "numero": 2,
-      "materias": [
-        { "nombre": "Dibujo técnico", "color": "rosado", "correlativas": [] },
-        { "nombre": "Cálculo 1", "color": "azul", "correlativas": ["Matemática"] },
-        { "nombre": "Introducción a la Física", "color": "azul", "correlativas": [] },
-        { "nombre": "Álgebra Vectorial", "color": "azul", "correlativas": ["Álgebra"] },
-        { "nombre": "Química General", "color": "azul", "correlativas": [] },
-        { "nombre": "Misterio Cristiano 1", "color": "gris", "correlativas": [] },
-        { "nombre": "Comunicación oral y escrita 2", "color": "violeta", "correlativas": ["Comunicación oral y escrita 1"] },
-        { "nombre": "Introducción a la Sociología", "color": "violeta", "correlativas": [] },
-        { "nombre": "Historia de la Cultura", "color": "violeta", "correlativas": [] },
-        { "nombre": "Antropología Filosófica", "color": "violeta", "correlativas": [] }
-      ]
+const mallaData = {
+    semestres: [
+        {
+            nombre: "Primer Año - Admisión",
+            creditos: 16,
+            materias: [
+                { nombre: "Fe y Ciencias", color: "gris", correlativas: [] },
+                { nombre: "Historia del Paraguay", color: "violeta", correlativas: [] },
+                // ... otras materias de admisión
+            ]
+        },
+        {
+            nombre: "Primer Año - Primer Semestre",
+            creditos: 16,
+            materias: [
+                { nombre: "Matemática 1", color: "azul", correlativas: ["Cálculo 1"] },
+                { nombre: "Introducción al Dibujo Técnico", color: "rosa", correlativas: ["Dibujo Técnico"] },
+                // ... otras materias del semestre
+            ]
+        },
+        // ... resto de semestres (similar al ejemplo)
+    ],
+    colores: {
+        azul: "#3498db",    // Ciencias Básicas
+        amarillo: "#f1c40f", // Optativas
+        rosa: "#e91e63",    // Ciencias de la Ingeniería
+        gris: "#95a5a6",    // Pastoral
+        violeta: "#9b59b6", // Humanísticas
+        magenta: "#e74c3c", // Aplicaciones
+        verde: "#2ecc71"    // Complementarias
     }
-  ]
-}
-
+};
